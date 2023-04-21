@@ -34,7 +34,7 @@ public class MyService {
     String op=g.toJson(outPut);
     return op;
   }
-  public Boolean createPlan(int planId, String planName,int mealsPerDay,int planInterval,String user,JsonArray mealRecord){
+  public boolean createPlan(int planId, String planName,int mealsPerDay,int planInterval,String user,JsonArray mealRecord){
     if(mysql.createPlan(planId, planName,mealsPerDay,planInterval,user)&& mysql.createMealRecord(mealRecord)){
       return true;
     }
