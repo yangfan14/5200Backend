@@ -37,7 +37,7 @@ public class MyController {
   public String createPlan(@RequestBody String body){
     Gson g=new Gson();
     JsonObject input=g.fromJson(body, JsonObject.class);
-    return myService.createPlan(input.get("planName").getAsString(),input.get("mealsPerday").getAsInt(),input.get("planInterval").getAsInt(),input.get("user").getAsString(),input.get("mealRecords").getAsJsonArray());
+    return myService.createPlan(input.get("planId").getAsInt(), input.get("planName").getAsString(),input.get("mealsPerday").getAsInt(),input.get("planInterval").getAsInt(),input.get("user").getAsString(),input.get("mealRecords").getAsJsonArray());
   }
   @PostMapping("/createMeal")
   public String createMeal(@RequestBody String body){

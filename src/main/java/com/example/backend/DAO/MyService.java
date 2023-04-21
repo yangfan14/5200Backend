@@ -26,16 +26,18 @@ public class MyService {
     Gson g=new Gson();
     JsonArray plans_overview=mysql.getAllPlans(userEmail);
     JsonArray outPut=new JsonArray();
-    for(int i=0;i<plans_overview.size();i++){
-      JsonObject plan=plans_overview.get(i).getAsJsonObject();
-      JsonObject planElement=mysql.getRecordOfPlan(plan.get("planId").getAsInt(),plan.get("planName").getAsString(),plan.get("mealsPerDay").getAsInt(),plan.get("planInterval").getAsInt());
-      outPut.add(planElement);
+    if (plans_overview != null) {
+      for (int i = 0; i < plans_overview.size(); i++) {
+        JsonObject plan = plans_overview.get(i).getAsJsonObject();
+        JsonObject planElement = mysql.getRecordOfPlan(plan.get("planId").getAsInt(), plan.get("planName").getAsString(), plan.get("mealsPerDay").getAsInt(), plan.get("planInterval").getAsInt());
+        outPut.add(planElement);
+      }
     }
     String op=g.toJson(outPut);
     return op;
   }
-  public String createPlan(String planName,int mealsPerDay,int planInterval,String user,JsonArray mealRecord){
-    if(mysql.createPlan(planName,mealsPerDay,planInterval,user)&& mysql.createMealRecord(mealRecord)){
+  public String createPlan(int planId, String planName,int mealsPerDay,int planInterval,String user,JsonArray mealRecord){
+    if(mysql.createPlan(planId, planName,mealsPerDay,planInterval,user)&& mysql.createMealRecord(mealRecord)){
       return "Successfully uploaded";
     }
     else{

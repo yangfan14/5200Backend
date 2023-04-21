@@ -32,7 +32,7 @@ public class JavaMySql {
   /**
    * The password for the MySQL account (or empty for anonymous)
    */
-  private String password = "Sdsdssdd123!";
+  private String password = "FanyangSQL0=";
 
   /**
    * The name of the computer running MySQL
@@ -278,7 +278,7 @@ public class JavaMySql {
       return plans;
     }
     catch (Exception e){
-      System.out.println("Get plan failed");
+      System.out.println("Get plans failed");
       return null;
     }
 
@@ -330,7 +330,7 @@ public class JavaMySql {
       return ingredients;
     }
     catch (Exception e){
-      System.out.println("Get plan failed");
+      System.out.println("Get Ingredients failed");
       return null;
     }
   }
@@ -384,14 +384,15 @@ public class JavaMySql {
 
   }
 
-  public boolean createPlan(String planName,int mealsPerDay,int planInterval,String user){
+  public boolean createPlan(int planId, String planName,int mealsPerDay,int planInterval,String user){
     try{
-      CallableStatement cs=this.conn.prepareCall("{CALL create_plan(?,?,?,?)}");
+      CallableStatement cs=this.conn.prepareCall("{CALL create_plan(?,?,?,?,?)}");
       cs.clearParameters();
-      cs.setString(1,planName);
-      cs.setInt(2,mealsPerDay);
-      cs.setInt(3,planInterval);
-      cs.setString(4,user);
+      cs.setInt(1,planId);
+      cs.setString(2,planName);
+      cs.setInt(3,mealsPerDay);
+      cs.setInt(4,planInterval);
+      cs.setString(5,user);
       cs.executeUpdate();
       cs.close();
       return true;
