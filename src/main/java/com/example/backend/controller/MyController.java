@@ -1,6 +1,6 @@
 package com.example.backend.controller;
 
-import com.example.backend.DAO.MyService;
+import com.example.backend.service.MyService;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -72,10 +72,10 @@ public class MyController {
     JsonObject input=g.fromJson(body, JsonObject.class);
     return myService.updatePlan(input.get("planId").getAsInt(),input.get("name").getAsString(),input.get("mealsPerDay").getAsInt(),input.get("interval").getAsInt());
   }
-  @PostMapping("/delete")
+  @PostMapping("/deleteMeal")
   public String delete(@RequestBody String body){
     Gson g=new Gson();
     JsonObject input=g.fromJson(body, JsonObject.class);
-    return myService.deletePlan(input.get("plan_id").getAsInt());
+    return myService.deleteMeal(input.get("mealId").getAsInt());
   }
 }
