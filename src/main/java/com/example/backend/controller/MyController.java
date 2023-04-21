@@ -65,8 +65,13 @@ public class MyController {
     return myService.updatePlan(input.get("planId").getAsInt(),input.get("name").getAsString(),input.get("mealsPerDay").getAsInt(),input.get("interval").getAsInt());
   }
   @PostMapping("/deleteMeal")
-  public String delete(@RequestBody String body){
+  public String deleteMeal(@RequestBody String body){
     JsonObject input=g.fromJson(body, JsonObject.class);
     return myService.deleteMeal(input.get("mealId").getAsInt());
+  }
+  @PostMapping("/getNutritionOfMeals")
+  public String getNutritionOfMeals(@RequestBody String body){
+    JsonObject input=g.fromJson(body, JsonObject.class);
+    return myService.getNutritionOfMeals(input.get("mealId").getAsInt());
   }
 }

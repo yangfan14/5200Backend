@@ -83,6 +83,12 @@ public class MyService {
     String otpt=g.toJson(array);
     return otpt;
   }
+  public String getNutritionOfMeals(int mealId) {
+    Gson g= new Gson();
+    JsonArray array= mysql.getNutritionOfMeals(mealId);
+    String otpt=g.toJson(array);
+    return otpt;
+  }
   public boolean addMealIngredient(int mealId, String ingredientName, double quantity) {
     return mysql.addMealIngredient(  mealId,  ingredientName, quantity);
   }

@@ -237,6 +237,35 @@ public class JavaMySql {
       return null;
     }
   }
+  public JsonArray getNutritionOfMeals(int mealId){
+    try{
+      CallableStatement cs=this.conn.prepareCall("{CALL get_meal_nutrition(?)}");
+      cs.clearParameters();
+      cs.setInt(1, mealId);
+      ResultSet rs= cs.executeQuery();
+      JsonArray multiNutritionInformation=new JsonArray();
+      while (rs.next()) {
+        JsonObject nutritionInformation=new JsonObject();
+        int meal_id = rs.getInt("meal_id");
+        String meal_name = rs.getString("meal_name");
+        String nutrition_name = rs.getString("nutrition_name");
+        String measurement = rs.getString("measurement");
+        float total = rs.getFloat("total");
+        nutritionInformation.addProperty("meal_id",meal_id);
+        nutritionInformation.addProperty("meal_name",meal_name);
+        nutritionInformation.addProperty("nutrition_name",nutrition_name);
+        nutritionInformation.addProperty("measurement",measurement);
+        nutritionInformation.addProperty("total",total);
+        multiNutritionInformation.add(nutritionInformation);
+      }
+      cs.close();
+      return multiNutritionInformation;
+    }
+    catch (Exception e){
+      System.out.println("Get Ingredients failed");
+      return null;
+    }
+  }
   public JsonObject getRecordOfPlan(int plan_id,String name,int mealsPerDay,int interval){
     try{
       //Gson gson = new Gson();
