@@ -283,28 +283,56 @@ public class JavaMySql {
     }
 
   };
-  public boolean getAllMeals(String userEmail){
+  public JsonArray getAllMeals(String userEmail){
+    JsonArray meals=new JsonArray();
     try{
       CallableStatement cs=this.conn.prepareCall("{CALL all_meals(?)}");
       cs.clearParameters();
       cs.setString(1, userEmail);
       ResultSet rs= cs.executeQuery();
       while (rs.next()) {
+        JsonObject meal=new JsonObject();
         int mealId = rs.getInt("meal_id");
         String mealName = rs.getString("meal_name");
         int timeNeeded = rs.getInt("time_needed");
         String instructions = rs.getString("instructions");
         String ingredients = rs.getString("ingredients");
+        meal.addProperty("_id",mealId);
+        meal.addProperty("name",mealName);
+        meal.addProperty("instructions",instructions);
+        meal.addProperty("timeNeeded",timeNeeded);
+        meal.addProperty("ingredients",ingredients);
+        meals.add(meal);
       }
+
       cs.close();
+
     }
     catch (Exception e){
       System.out.println("Get all meals failed");
     }
-    return false;
+    return meals;
   }
   public JsonArray getIngredients(){
-    return null;
+    try{
+      CallableStatement cs=this.conn.prepareCall("{CALL get_ingredient()}");
+      ResultSet rs= cs.executeQuery();
+      JsonArray ingredients=new JsonArray();
+      while (rs.next()) {
+        JsonObject ingredient=new JsonObject();
+        String name = rs.getString("name");
+        String measurement = rs.getString("measurement");
+        ingredient.addProperty("name",name);
+        ingredient.addProperty("measurement",measurement);
+        ingredients.add(ingredient);
+      }
+      cs.close();
+      return ingredients;
+    }
+    catch (Exception e){
+      System.out.println("Get plan failed");
+      return null;
+    }
   }
   public JsonObject getRecordOfPlan(int plan_id,String name,int mealsPerDay,int interval){
     try{

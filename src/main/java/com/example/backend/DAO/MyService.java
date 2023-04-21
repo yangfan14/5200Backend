@@ -50,8 +50,10 @@ public class MyService {
     return true;
   }
   public String getIngredient(){
-    JsonArray ings=new JsonArray();
-    return "";
+    JsonArray ings=mysql.getIngredients();
+    Gson g=new Gson();
+    String otpt=g.toJson(ings);
+    return otpt;
   }
   public String insertNutrition(String name,String measurement){
     return mysql.insertNutrition(name,measurement);
@@ -70,8 +72,11 @@ public class MyService {
   }
   public JsonArray getAllPlans(String userEmail){return mysql.getAllPlans(userEmail);
   }
-  public boolean getAllMeals(String userEmail) {
-    return mysql.getAllMeals(userEmail);
+  public String getAllMeals(String userEmail) {
+    Gson g= new Gson();
+    JsonArray array= mysql.getAllMeals(userEmail);
+    String otpt=g.toJson(array);
+    return otpt;
   }
   public String addMealIngredient(int mealId, String ingredientName, double quantity) {
     return mysql.addMealIngredient(  mealId,  ingredientName, quantity);

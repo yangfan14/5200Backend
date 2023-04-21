@@ -31,7 +31,7 @@ public class MyController {
   public String queryPlan(@RequestBody String body){
     Gson g=new Gson();
     JsonObject input=g.fromJson(body, JsonObject.class);
-    return myService.queryPlans(input.get("email").getAsString());
+    return myService.queryPlans(input.get("userEmail").getAsString());
   }
   @PostMapping("/createPlan")
   public String createPlan(@RequestBody String body){
@@ -52,6 +52,12 @@ public class MyController {
   }
   @PostMapping("/getIngredient")
   public String getIngredient(@RequestBody String body){
-    return "";
+    return myService.getIngredient();
+  }
+  @PostMapping("/getMeals")
+  public String getMeals(@RequestBody String body){
+    Gson g=new Gson();
+    JsonObject input=g.fromJson(body, JsonObject.class);
+    return myService.getAllMeals(input.get("userEmail").getAsString());
   }
 }
