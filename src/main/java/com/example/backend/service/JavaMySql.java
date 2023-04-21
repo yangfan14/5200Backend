@@ -32,7 +32,7 @@ public class JavaMySql {
   /**
    * The password for the MySQL account (or empty for anonymous)
    */
-  private String password = "FanyangSQL0=";
+  private String password = "Sdsdssdd123!";
 
   /**
    * The name of the computer running MySQL
@@ -266,12 +266,10 @@ public class JavaMySql {
         String planName = rs.getString("plan_name");
         int mealsPerDay = rs.getInt("meals_per_day");
         int planInterval = rs.getInt("plan_interval");
-        int totalCookTime = rs.getInt("total_cook_time");
         plan.addProperty("planId",planId);
         plan.addProperty("planName",planName);
         plan.addProperty("mealsPerDay",mealsPerDay);
         plan.addProperty("planInterval",planInterval);
-        String meals = rs.getString("meals");
         plans.add(plan);
       }
       cs.close();
@@ -279,6 +277,7 @@ public class JavaMySql {
     }
     catch (Exception e){
       System.out.println("Get plans failed");
+      System.out.println(e.getMessage());
       return null;
     }
 
@@ -379,6 +378,8 @@ public class JavaMySql {
       return json;
     }
     catch (Exception e){
+      System.out.println("getRecordOfPlan error");
+      System.out.println(e.getMessage());
       return null;
     }
 
