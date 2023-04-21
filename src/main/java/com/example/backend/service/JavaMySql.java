@@ -308,6 +308,7 @@ public class JavaMySql {
 
     }
     catch (Exception e){
+      System.out.println(e.getMessage());
       System.out.println("Get all meals failed");
     }
     return meals;
@@ -418,6 +419,7 @@ public class JavaMySql {
       return true;
     }
     catch (Exception e){
+      System.out.println(e.getMessage());
       return false;
     }
   }

@@ -37,7 +37,7 @@ public class MyController {
   public String createPlan(@RequestBody String body){
     Gson g=new Gson();
     JsonObject input=g.fromJson(body, JsonObject.class);
-    return myService.createPlan(input.get("planId").getAsInt(), input.get("planName").getAsString(),input.get("mealsPerday").getAsInt(),input.get("planInterval").getAsInt(),input.get("user").getAsString(),input.get("mealRecords").getAsJsonArray());
+    return myService.createPlan(input.get("planId").getAsInt(), input.get("planName").getAsString(),input.get("mealsPerDay").getAsInt(),input.get("planInterval").getAsInt(),input.get("user").getAsString(),input.get("mealRecords").getAsJsonArray());
   }
   @PostMapping("/createMeal")
   public String createMeal(@RequestBody String body){
@@ -59,5 +59,23 @@ public class MyController {
     Gson g=new Gson();
     JsonObject input=g.fromJson(body, JsonObject.class);
     return myService.getAllMeals(input.get("userEmail").getAsString());
+  }
+  @PostMapping("/deletePlan")
+  public String deletePlan(@RequestBody String body){
+    Gson g=new Gson();
+    JsonObject input=g.fromJson(body, JsonObject.class);
+    return myService.deletePlan(input.get("planId").getAsInt());
+  }
+  @PostMapping("/updatePlan")
+  public String updatePlan(@RequestBody String body){
+    Gson g=new Gson();
+    JsonObject input=g.fromJson(body, JsonObject.class);
+    return myService.updatePlan(input.get("planId").getAsInt(),input.get("name").getAsString(),input.get("mealsPerDay").getAsInt(),input.get("interval").getAsInt());
+  }
+  @PostMapping("/delete")
+  public String delete(@RequestBody String body){
+    Gson g=new Gson();
+    JsonObject input=g.fromJson(body, JsonObject.class);
+    return myService.deletePlan(input.get("plan_id").getAsInt());
   }
 }
