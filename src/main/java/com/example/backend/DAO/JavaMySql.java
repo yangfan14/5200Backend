@@ -358,7 +358,7 @@ public class JavaMySql {
       return false;
     }
   }
-  public String updatePlan(int planId, String planName, int mealsPerDay, int planInterval){
+  public boolean updatePlan(int planId, String planName, int mealsPerDay, int planInterval){
     try{
       CallableStatement cs=this.conn.prepareCall("{CALL update_plan(?,?,?,?)}");
       cs.clearParameters();
@@ -368,10 +368,10 @@ public class JavaMySql {
       cs.setInt(4,planInterval);
       cs.executeUpdate();
       cs.close();
-      return "Successfully update plan";
+      return true;
     }
     catch (Exception e){
-      return e.getMessage();
+      return false;
     }
   }
   public String updateMeal(int mealId, String mealName, String instructions, int timeNeeded){

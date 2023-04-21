@@ -60,7 +60,7 @@ public class MyController {
     return myService.deletePlan(input.get("planId").getAsInt());
   }
   @PostMapping("/updatePlan")
-  public String updatePlan(@RequestBody String body){
+  public boolean updatePlan(@RequestBody String body){
     JsonObject input=g.fromJson(body, JsonObject.class);
     return myService.updatePlan(input.get("planId").getAsInt(),input.get("name").getAsString(),input.get("mealsPerDay").getAsInt(),input.get("interval").getAsInt());
   }

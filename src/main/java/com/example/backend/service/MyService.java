@@ -86,7 +86,7 @@ public class MyService {
   public boolean addMealIngredient(int mealId, String ingredientName, double quantity) {
     return mysql.addMealIngredient(  mealId,  ingredientName, quantity);
   }
-  public String updatePlan(int planId, String planName, int mealsPerDay, int planInterval) {
+  public boolean updatePlan(int planId, String planName, int mealsPerDay, int planInterval) {
     return mysql.updatePlan (  planId,  planName, mealsPerDay,  planInterval);
   }
   public String updateMeal(int mealId, String mealName, String instructions, int timeNeeded){
