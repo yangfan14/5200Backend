@@ -32,7 +32,7 @@ public class MyController {
     return myService.queryPlans(input.get("userEmail").getAsString());
   }
   @PostMapping("/createPlan")
-  public String createPlan(@RequestBody String body){
+  public Boolean createPlan(@RequestBody String body){
     JsonObject input=g.fromJson(body, JsonObject.class);
     return myService.createPlan(input.get("planId").getAsInt(), input.get("planName").getAsString(),input.get("mealsPerDay").getAsInt(),input.get("planInterval").getAsInt(),input.get("user").getAsString(),input.get("mealRecords").getAsJsonArray());
   }

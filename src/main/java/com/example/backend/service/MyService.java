@@ -34,12 +34,12 @@ public class MyService {
     String op=g.toJson(outPut);
     return op;
   }
-  public String createPlan(int planId, String planName,int mealsPerDay,int planInterval,String user,JsonArray mealRecord){
+  public Boolean createPlan(int planId, String planName,int mealsPerDay,int planInterval,String user,JsonArray mealRecord){
     if(mysql.createPlan(planId, planName,mealsPerDay,planInterval,user)&& mysql.createMealRecord(mealRecord)){
-      return "Successfully uploaded";
+      return true;
     }
     else{
-      return "Failed";
+      return false;
     }
   }
   public boolean createMeal(String mealName,int mealId,int timeNeeded,String instructions,String user,String[] currentIngredients,int[] numOfIngredients){
