@@ -40,15 +40,14 @@ public class MyController {
     return myService.createPlan(input.get("planId").getAsInt(), input.get("planName").getAsString(),input.get("mealsPerDay").getAsInt(),input.get("planInterval").getAsInt(),input.get("user").getAsString(),input.get("mealRecords").getAsJsonArray());
   }
   @PostMapping("/createMeal")
-  public String createMeal(@RequestBody String body){
+  public boolean createMeal(@RequestBody String body){
     Gson g=new Gson();
     JsonObject input=g.fromJson(body, JsonObject.class);
     JsonArray ing=input.getAsJsonArray("currentIngredients");
     JsonArray num=input.getAsJsonArray("numOfIngredients");
     String[] inga=g.fromJson(ing,String[].class);
     int[] numa=g.fromJson(num,int[].class);
-    myService.createMeal(input.get("mealName").getAsString(),input.get("mealId").getAsInt(),input.get("timeNeeded").getAsInt(),input.get("instructions").getAsString(),input.get("user").getAsString(),inga,numa);
-    return "Success";
+    return myService.createMeal(input.get("mealName").getAsString(),input.get("mealId").getAsInt(),input.get("timeNeeded").getAsInt(),input.get("instructions").getAsString(),input.get("user").getAsString(),inga,numa);
   }
   @PostMapping("/getIngredient")
   public String getIngredient(@RequestBody String body){

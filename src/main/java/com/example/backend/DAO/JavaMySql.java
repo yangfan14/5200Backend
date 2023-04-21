@@ -329,7 +329,7 @@ public class JavaMySql {
       return false;
     }
   }
-  public String createMeal(int mealId,String mealName, String instructions, int timeNeeded, String userEmail){
+  public boolean createMeal(int mealId,String mealName, String instructions, int timeNeeded, String userEmail){
     try{
       CallableStatement cs=this.conn.prepareCall("{CALL create_meal(?,?,?,?,?)}");
       cs.clearParameters();
@@ -340,13 +340,13 @@ public class JavaMySql {
       cs.setInt(5,mealId);
       cs.executeUpdate();
       cs.close();
-      return "Successfully insert Meal";
+      return true;
     }
     catch (Exception e){
-      return e.getMessage();
+      return false;
     }
   }
-  public String addMealIngredient(int mealId, String ingredientName, double quantity){
+  public boolean addMealIngredient(int mealId, String ingredientName, double quantity){
     try{
       CallableStatement cs=this.conn.prepareCall("{CALL add_meal_ingredient(?,?,?)}");
       cs.clearParameters();
@@ -355,10 +355,10 @@ public class JavaMySql {
       cs.setDouble(3,quantity);
       cs.executeUpdate();
       cs.close();
-      return "Successfully insert Ingredient to a Meal";
+      return true;
     }
     catch (Exception e){
-      return e.getMessage();
+      return false;
     }
   }
   public String updatePlan(int planId, String planName, int mealsPerDay, int planInterval){

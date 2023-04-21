@@ -43,9 +43,14 @@ public class MyService {
     }
   }
   public boolean createMeal(String mealName,int mealId,int timeNeeded,String instructions,String user,String[] currentIngredients,int[] numOfIngredients){
-    mysql.createMeal(mealId,mealName,instructions,timeNeeded,user);
+
+    if(!mysql.createMeal(mealId,mealName,instructions,timeNeeded,user)){
+      return false;
+    };
     for(int i=0;i< currentIngredients.length;i++){
-      mysql.addMealIngredient(mealId,currentIngredients[i],numOfIngredients[i]);
+      if(!mysql.addMealIngredient(mealId,currentIngredients[i],numOfIngredients[i])){
+        return false;
+      };
     }
     return true;
   }
@@ -78,7 +83,7 @@ public class MyService {
     String otpt=g.toJson(array);
     return otpt;
   }
-  public String addMealIngredient(int mealId, String ingredientName, double quantity) {
+  public boolean addMealIngredient(int mealId, String ingredientName, double quantity) {
     return mysql.addMealIngredient(  mealId,  ingredientName, quantity);
   }
   public String updatePlan(int planId, String planName, int mealsPerDay, int planInterval) {
