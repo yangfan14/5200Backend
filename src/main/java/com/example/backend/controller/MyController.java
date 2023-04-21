@@ -14,34 +14,30 @@ public class MyController {
 
   @Autowired
   private MyService myService;
-
+  @Autowired
+  private Gson g;
   @PostMapping("/queryUser")
   public boolean queryUser(@RequestBody String body) {
-    Gson g=new Gson();
     JsonObject input=g.fromJson(body, JsonObject.class);
     return myService.query_user(input.get("userName").getAsString(),input.get("password").getAsString() );
   }
   @PostMapping("/insertUser")
   public String insertUser(@RequestBody String body) {
-    Gson g=new Gson();
     JsonObject input=g.fromJson(body, JsonObject.class);
     return myService.insertUser(input.get("userName").getAsString(),input.get("password").getAsString(),input.get("userEmail").getAsString());
   }
   @PostMapping ("/queryPlan")
   public String queryPlan(@RequestBody String body){
-    Gson g=new Gson();
     JsonObject input=g.fromJson(body, JsonObject.class);
     return myService.queryPlans(input.get("userEmail").getAsString());
   }
   @PostMapping("/createPlan")
   public String createPlan(@RequestBody String body){
-    Gson g=new Gson();
     JsonObject input=g.fromJson(body, JsonObject.class);
     return myService.createPlan(input.get("planId").getAsInt(), input.get("planName").getAsString(),input.get("mealsPerDay").getAsInt(),input.get("planInterval").getAsInt(),input.get("user").getAsString(),input.get("mealRecords").getAsJsonArray());
   }
   @PostMapping("/createMeal")
   public boolean createMeal(@RequestBody String body){
-    Gson g=new Gson();
     JsonObject input=g.fromJson(body, JsonObject.class);
     JsonArray ing=input.getAsJsonArray("currentIngredients");
     JsonArray num=input.getAsJsonArray("numOfIngredients");
@@ -55,25 +51,21 @@ public class MyController {
   }
   @PostMapping("/getMeals")
   public String getMeals(@RequestBody String body){
-    Gson g=new Gson();
     JsonObject input=g.fromJson(body, JsonObject.class);
     return myService.getAllMeals(input.get("userEmail").getAsString());
   }
   @PostMapping("/deletePlan")
   public String deletePlan(@RequestBody String body){
-    Gson g=new Gson();
     JsonObject input=g.fromJson(body, JsonObject.class);
     return myService.deletePlan(input.get("planId").getAsInt());
   }
   @PostMapping("/updatePlan")
   public String updatePlan(@RequestBody String body){
-    Gson g=new Gson();
     JsonObject input=g.fromJson(body, JsonObject.class);
     return myService.updatePlan(input.get("planId").getAsInt(),input.get("name").getAsString(),input.get("mealsPerDay").getAsInt(),input.get("interval").getAsInt());
   }
   @PostMapping("/deleteMeal")
   public String delete(@RequestBody String body){
-    Gson g=new Gson();
     JsonObject input=g.fromJson(body, JsonObject.class);
     return myService.deleteMeal(input.get("mealId").getAsInt());
   }

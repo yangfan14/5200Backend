@@ -17,10 +17,7 @@ import java.util.Properties;
 import java.util.Scanner;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-/**
- *
- * @author kath
- */
+
 @Component
 public class JavaMySql {
 
@@ -413,7 +410,7 @@ public class JavaMySql {
       cs.setInt(1,planId);
       cs.executeUpdate();
       cs.close();
-      return "Successfully delete plan";
+      return "Successfully finished delete";
     }
     catch (Exception e){
       return e.getMessage();
